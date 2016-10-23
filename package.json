@@ -22,7 +22,8 @@
     "@types/express": "^4.0.33",
     "@types/node": "^6.0.45",
     "@types/socket.io": "^1.4.27",
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "typescript": "^2.0.3"
   },
   "dependencies": {
     "express": "^4.14.0",
