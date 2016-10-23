@@ -4,7 +4,8 @@
   "description": "Hacktoberfest 2016",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node app.js",
+    "compile": "tcs"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,15 @@
   "bugs": {
     "url": "https://github.com/tylerl0706/spooky/issues"
   },
-  "homepage": "https://github.com/tylerl0706/spooky#readme"
+  "homepage": "https://github.com/tylerl0706/spooky#readme",
+  "devDependencies": {
+    "@types/express": "^4.0.33",
+    "@types/node": "^6.0.45",
+    "@types/socket.io": "^1.4.27",
+    "bower": "^1.7.9"
+  },
+  "dependencies": {
+    "express": "^4.14.0",
+    "socket.io": "^1.5.0"
+  }
 }
