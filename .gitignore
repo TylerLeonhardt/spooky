@@ -40,3 +40,5 @@ jspm_packages
 app.d.ts
 app.js
 app.js.map
+
+secret.json
