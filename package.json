@@ -1,0 +1,19 @@
+{
+  "name": "spooky",
+  "version": "1.0.0",
+  "description": "Hacktoberfest 2016",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tylerl0706/spooky.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/tylerl0706/spooky/issues"
+  },
+  "homepage": "https://github.com/tylerl0706/spooky#readme"
+}
