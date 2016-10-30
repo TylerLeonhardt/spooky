@@ -1,8 +1,14 @@
-Hello World
-<script src="/socket.io/socket.io.js"></script>
-<script>
-  var socket = io.connect('http://localhost:8888');
-  socket.on('tweet', function (data) {
-    console.log(data);
-  });
-</script>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>title</title>
+    <script src="https://code.createjs.com/easeljs-0.8.2.min.js" ></script>
+    <script src="/socket.io/socket.io.js" ></script>
+  </head>
+  <body>
+   	<canvas id="myCanvas" style="background-color: #3F3F3F" width="800" height="600"></canvas>
+  </body>
+  <script src="/scripts/stageControl.js" ></script>
+  
+</html>
