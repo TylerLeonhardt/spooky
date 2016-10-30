@@ -16,11 +16,7 @@ var io = SocketIO(server);
 
 server.listen(8888);
 
-var twit = new Twit(secrets, (a:any,b:any,c:any) => {
-    //console.log(a);
-    //console.log(b);
-    //console.log(c);
-});
+var twit = new Twit(secrets, (a:any,b:any,c:any) => {});
 
 ///////////////////////////////////
 // Logic
@@ -37,16 +33,17 @@ io.on('connection', (socketServer) => {
 
 var stream = twit.stream('statuses/filter', { track: 'halloween' });
 stream.on('tweet', (tweet : any) => {
-    // console.log(tweet);
-    activeTweet = tweet;
+    if(tweet.user.lang == 'en' && !tweet.text.startsWith("RT @")){
+        activeTweet = tweet;
+        io.emit('tweet', activeTweet);
+    }
 });
 
 function throttle() {
     let timeout = (Math.random()*400)+50;
     setTimeout(()=>{
         io.emit('tweet', activeTweet);
-        //console.log(activeTweet);
-        throttle()
+        throttle();
     }, timeout);
 }
-throttle();
+// throttle();

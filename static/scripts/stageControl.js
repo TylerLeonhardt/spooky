@@ -1,5 +1,9 @@
 // initializes our tweet response object
 function createCircleInstance(data) {
+
+	// Buffer length for events piling up while javascript isn't on the main thread
+	if(tweetObjects.length > 50) return;
+
 	circle = new createjs.Shape();
 	color = decideRandomColor();
 	circle.graphics.beginFill(color).drawCircle(0, 0, 10);
@@ -7,12 +11,27 @@ function createCircleInstance(data) {
 	text = data.user.screen_name + ": " + data.text;
 	textObject = new createjs.Text(text, "12px Arial", "#ffffff");
 	textObject.x =  -(textObject.getMeasuredWidth() / 2);
+	textObject.tweetID = data.id_str;
+
+	textObject.on("click", clickHandler);
+
+	circle.on("click", clickHandler);
+
+	function clickHandler() {
+		document.getElementById('tweetContainer').innerHTML = "";
+		twttr.widgets.createTweet(
+			textObject.tweetID,
+			document.getElementById('tweetContainer'),
+			{
+				theme: 'dark'
+			}
+		);
+	}
 
 	container = new createjs.Container();
 	container.addChild(circle, textObject);
 	container.x = Math.random()*(width - 20) + 10;
 	container.y = Math.random()*(height - 20) + 10;
-	console.log(tweetObjects);
 	tweetObjects.push(container);
 	stage.addChild(tweetObjects[tweetObjects.length-1]);
 
@@ -30,6 +49,7 @@ function decideRandomColor() {
 	}
 }
 
+// Frame logic
 function handleTick() {
 	for(i = tweetObjects.length-1; i >= 0; i--) {
 
@@ -43,6 +63,7 @@ function handleTick() {
 	stage.update();
 }
 
+// Anonymous function to initialize page
 (function() {
 	stage = new createjs.Stage("myCanvas");
 	height = document.getElementById("myCanvas").clientHeight;
@@ -51,14 +72,11 @@ function handleTick() {
 	createjs.Ticker.addEventListener("tick", handleTick);
 
 	tweetObjects = [];
+	lastTweet = "";
 
 	var socket = io.connect('http://localhost:8888');
 	  console.log("socket connection successful");
 	  socket.on('tweet', function (data) {
-	    console.log(data);
-	    el = document.createElement("h4");
-	    el.innerHTML = (data.user.screen_name+":"+data.text);
-	    document.body.appendChild(el);
 	    createCircleInstance(data);
 	  });
 })();
