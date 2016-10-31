@@ -74,7 +74,7 @@ function handleTick() {
 	tweetObjects = [];
 	lastTweet = "";
 
-	var socket = io.connect('http://localhost:8888');
+	var socket = io.connect('http://52.161.24.197:8888');
 	  console.log("socket connection successful");
 	  socket.on('tweet', function (data) {
 	    createCircleInstance(data);
